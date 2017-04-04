@@ -1,44 +1,57 @@
 <md-card>
   <md-card-content>
-    <div>
-      <md-input-container style="width:300px">
+    <!--<div>
+      OG 1.050
+      <md-progress-bar
+          [color]="'query'"
+          [value]="80" [bufferValue]="90">
+      </md-progress-bar>
+      FG 1.010
+      <md-progress-bar
+          [color]="'accent'"
+          [value]="30">
+      </md-progress-bar>
+    </div>-->
+    <div [fxLayout]="'row'" [fxLayout.lt-md]="'column'" [fxLayoutGap]="'10px'">
+      <md-input-container [fxFlex]="'1 1.3'">
         <input mdInput placeholder="Nombre" value="Dunkelweizen">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="Batch" type="number" step="0.5" value="50">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="OG" type="number" step="0.001" value="1.050">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="IBUs" type="number" disabled value="34">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="Balance" type="number" disabled value="1.1">
       </md-input-container>
     </div>
-    <div>
-      <md-input-container style="width: 300px">
+    <div [fxLayout]="'row'" [fxLayout.lt-md]="'column'" [fxLayoutGap]="'10px'">
+      <md-input-container [fxFlex]="'1 1.3'">
         <input mdInput placeholder="Estilo" [mdAutocomplete]="auto">
+        <md-autocomplete #auto="mdAutocomplete">
+          <md-option value="Dorada pampeana">
+            Dorada pampeana
+          </md-option>
+          <md-option value="IPA Argenta">
+            IPA Argenta
+          </md-option>
+        </md-autocomplete>
       </md-input-container>
-      <md-autocomplete #auto="mdAutocomplete">
-        <md-option value="Dorada pampeana">
-          Dorada pampeana
-        </md-option>
-        <md-option value="IPA Argenta">
-          IPA Argenta
-        </md-option>
-      </md-autocomplete>
-      <md-input-container>
+      
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="Eficiencia" type="number" value="70">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="FG" type="number" step="0.001" disabled value="1.010">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="BU/GU" type="number" disabled value="0.75">
       </md-input-container>
-      <md-input-container>
+      <md-input-container [fxFlex]="'1 1'">
         <input mdInput placeholder="Alcohol %" type="number" disabled value="5">
       </md-input-container>
     </div>

@@ -1,6 +1,7 @@
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { ViewModule } from './view/view.module';
+import { UtilModule } from './util/util.module'; 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule.forRoot(),
-    ViewModule
+    ViewModule,
+    UtilModule
   ],
   providers: [],
   bootstrap: [AppComponent]
