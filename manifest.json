@@ -3,8 +3,8 @@
   "short_name": "BoM",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#3E4EB8",
-  "theme_color": "#2F3BA2",
+  "background_color": "#ffd740",
+  "theme_color": "#ffd740",
   "icons": [
     {
       "src": "./favicon.ico",
