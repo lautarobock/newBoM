@@ -5,14 +5,14 @@
   "static": {
     "urls": {
       "https://lautarobock.github.io/newBoM/polyfills.e5fc3032c38272a74cb2.bundle.js": "37e696886862c6862952bcbf06f2ceb88dfaca65",
-      "https://lautarobock.github.io/newBoM/main.3db51427d07f22f30688.bundle.js": "4602f4c87e2fa4300c4129abd91dda45e5072bae",
+      "https://lautarobock.github.io/newBoM/main.8c1650c2cfe35409f1c0.bundle.js": "2e3cc753c4d02ac9e9c83baaa1410f206a8e226f",
       "https://lautarobock.github.io/newBoM/sw-register.b73048fe3d9f8a1e7ae5.bundle.js": "a98270c864fc34e37b1d992bfe5994323558c2f8",
-      "https://lautarobock.github.io/newBoM/vendor.2a7700ee627e24a1e7f4.bundle.js": "de2d400fa7c170cce77a3d6f1562a1c111deac83",
-      "https://lautarobock.github.io/newBoM/inline.7d9b9daa17895adbc230.bundle.js": "8d69c65e54dcd009138b136176e22a900f3af244",
+      "https://lautarobock.github.io/newBoM/vendor.a407cfae3d878da7e4d9.bundle.js": "f19aa7096b4fd5937fce092fc44ed4581991a4b3",
+      "https://lautarobock.github.io/newBoM/inline.ae9db40119b4a8110222.bundle.js": "a399e033be1bb608476503ec918b883633c26c5c",
       "https://lautarobock.github.io/newBoM/styles.9db1bafdfc989b37db97.bundle.css": "74339cb7c76a8751d563b2c12bb35c361049e94a",
-      "https://lautarobock.github.io/newBoM/manifest.json": "9a83f67ea4ec90aa52541c35d3820b6e07f6756e",
       "https://lautarobock.github.io/newBoM/favicon.ico": "3c22c11d7018f031555b74e1ec5c9532ff7206b2",
-      "https://lautarobock.github.io/newBoM/index.html": "bbc365bd286e69675f8650fe9626d7292b391f42"
+      "https://lautarobock.github.io/newBoM/manifest.json": "9a83f67ea4ec90aa52541c35d3820b6e07f6756e",
+      "https://lautarobock.github.io/newBoM/index.html": "9fc3d8f7c36697ef0b0efcd0926e4eb4aa2eb987"
     },
     "_generatedFromWebpack": true
   }
