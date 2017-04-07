@@ -12,14 +12,16 @@ export class AppComponent {
   constructor(private sessionService: SessionService, private ngZone: NgZone) { }
 
   ngAfterViewInit() {
-    gapi.signin2.render('my-signin2', {
-      'scope': 'profile email',
-      'width': 110,
-      'height': 35,
-      'longtitle': false,
-      'theme': 'light',
-      'onsuccess': param => this.onSignIn(param)
-    });
+    if (!this.sessionService.token()) {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 110,
+        'height': 35,
+        'longtitle': false,
+        'theme': 'light',
+        'onsuccess': param => this.onSignIn(param)
+      });
+    }
   }
 
   public onSignIn(googleUser) {

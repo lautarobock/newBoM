@@ -3,7 +3,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 @Injectable()
 export class SessionService {
 
-  private googleUser: any = null;
   onUserChange = new EventEmitter();
 
   constructor() { }
@@ -14,12 +13,13 @@ export class SessionService {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    this.googleUser = user;
-    this.onUserChange.emit(this.googleUser);
+    // this.googleUser = user;
+    window.localStorage['token'] = profile.getId();
+    this.onUserChange.emit(window.localStorage['token']);
   }
 
-  googleUserId() {
-    return this.googleUser.getBasicProfile().getId();
+  token() {
+    return window.localStorage['token'];
   }
 
 }

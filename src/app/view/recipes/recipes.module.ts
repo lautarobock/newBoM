@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RecipeViewComponent } from './recipe-view/recipe-view.component';
+import { FormsModule }    from '@angular/forms';
+import { RecipeViewComponent, RecipeViewRouteDecorator } from './recipe-view/recipe-view.component';
 import { MaterialModule } from '@angular/material';
 import { RecipeGeneralComponent } from './recipe-view/recipe-general/recipe-general.component';
 import { RecipeGrainsComponent } from './recipe-view/recipe-grains/recipe-grains.component';
@@ -15,9 +16,19 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
     MaterialModule,
     FlexLayoutModule,
     ServicesModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FormsModule
   ],
-  exports: [RecipeViewComponent, RecipesListComponent],
-  declarations: [RecipeViewComponent, RecipeGeneralComponent, RecipeGrainsComponent, RecipesListComponent]
+  exports: [
+    RecipeViewRouteDecorator, 
+    RecipesListComponent
+  ],
+  declarations: [
+    RecipeViewComponent, 
+    RecipeViewRouteDecorator, 
+    RecipeGeneralComponent, 
+    RecipeGrainsComponent, 
+    RecipesListComponent
+  ]
 })
 export class RecipesModule { }

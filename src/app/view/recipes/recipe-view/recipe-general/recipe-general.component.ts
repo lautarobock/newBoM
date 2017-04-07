@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'bom-recipe-general',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-general.component.css']
 })
 export class RecipeGeneralComponent implements OnInit {
+
+  @Input() recipe;
 
   constructor() { }
 
