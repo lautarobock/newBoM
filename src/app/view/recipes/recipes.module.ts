@@ -7,15 +7,17 @@ import { RecipeGrainsComponent } from './recipe-view/recipe-grains/recipe-grains
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { ServicesModule } from '../../services/services.module';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
-    ServicesModule
+    ServicesModule,
+    InfiniteScrollModule
   ],
-  exports: [RecipeViewComponent],
+  exports: [RecipeViewComponent, RecipesListComponent],
   declarations: [RecipeViewComponent, RecipeGeneralComponent, RecipeGrainsComponent, RecipesListComponent]
 })
 export class RecipesModule { }

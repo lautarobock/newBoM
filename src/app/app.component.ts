@@ -1,29 +1,28 @@
 import { SessionService } from './util/session.service';
-import { StreamController } from '@angular/service-worker/worker';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'bom-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'NEW BOM';
 
-  constructor(private sessionService: SessionService) {}
+  constructor(private sessionService: SessionService, private ngZone: NgZone) { }
 
   ngAfterViewInit() {
     gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 110,
-        'height': 35,
-        'longtitle': false,
-        'theme': 'light',
-        'onsuccess': param => this.onSignIn(param)
+      'scope': 'profile email',
+      'width': 110,
+      'height': 35,
+      'longtitle': false,
+      'theme': 'light',
+      'onsuccess': param => this.onSignIn(param)
     });
   }
 
   public onSignIn(googleUser) {
-    this.sessionService.registerGoogleUser(googleUser);
-};
+    this.ngZone.run(() => this.sessionService.registerGoogleUser(googleUser));
+  };
 }

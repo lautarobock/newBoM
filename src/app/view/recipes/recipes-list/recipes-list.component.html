@@ -1,3 +1,28 @@
-<p>
-  recipes-list works!
-</p>
+<!--<md-list infinite-scroll (scrolled)="onScroll()">
+  <md-list-item *ngFor="let recipe of recipes">
+    <i md-list-icon class="fa fa-beer" style="font-size: 40px"></i>
+    <h3 md-line>{{recipe.code}} - {{recipe.NAME}} </h3>
+    <p md-line>OG: {{recipe.OG}} </p>
+    <p md-line>ABV: {{recipe.ABV}}% </p>
+  </md-list-item>
+</md-list>-->
+<!--<div infinite-scroll (scrolled)="onScroll()" [fxLayout]="'row'" [fxLayout.lt-md]="'column'" [fxLayoutGap]="'10px'" fxLayoutWrap fxLayoutAlign="center stretch">
+  <div *ngFor="let recipe of recipes" [fxFlex]="'1 1'">
+    <md-card>
+      <i class="fa fa-beer" style="font-size: 40px"></i>
+      <h3>{{recipe.code}} - {{recipe.NAME}} </h3>
+      <p>OG: {{recipe.OG}} </p>
+      <p>ABV: {{recipe.ABV}}% </p>
+    </md-card>
+  </div>
+</div>-->
+<div>
+  <span *ngFor="let recipe of recipes" style="width: 300px; float: left;">
+    <md-card style="height: 200px; overflow: hidden; margin: 5px;text-align: center;">
+      <i class="fa fa-beer" style="font-size: 40px"></i>
+      <h3>{{recipe.code}} - {{recipe.NAME}} </h3>
+      <p>OG: {{recipe.OG}} </p>
+      <p>ABV: {{recipe.ABV}}% </p>
+    </md-card>
+  </span>
+</div>
