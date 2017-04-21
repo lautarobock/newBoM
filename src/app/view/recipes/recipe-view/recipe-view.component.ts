@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs/Rx';
+import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { ChangeService } from '../../../services/change.service';
 import { CalcService } from '../../../services/calc.service';
 import { Recipe, EditableRecipe, RecipeConverter } from '../../../domain/recipe';
@@ -14,12 +16,19 @@ export class RecipeViewComponent implements OnInit {
 
   @Input() recipeId: string;
   editable: EditableRecipe;
+  watcher: Subscription;
+  isLtSm: boolean;
 
   constructor(
     private recipesService: RecipesService, 
     private calcService: CalcService,
-    private changeService: ChangeService
-  ) { }
+    private changeService: ChangeService,
+    public media: ObservableMedia
+  ) { 
+    this.watcher = media.subscribe((change: MediaChange) => {
+      this.isLtSm = change.mqAlias == 'xs' || change.mqAlias == 'sm';
+    });
+  }
 
   ngOnInit() {
     this.recipesService.get(this.recipeId).subscribe(recipe => {

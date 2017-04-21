@@ -1,14 +1,26 @@
-<md-card>
-  <md-card-header>
-    {{editable?.recipe.name}}
-  </md-card-header>
-  <md-card-content>
-    <bom-recipe-general [editable]="editable" *ngIf="editable"></bom-recipe-general>
-    <div style="margin-top: 1em">
-      <bom-recipe-grains [editable]="editable" *ngIf="editable"></bom-recipe-grains>
+<md-sidenav-container fullscreen>
+  <md-sidenav #sidenav [mode]="isLtSm?'over':'side'" [opened]="!isLtSm" align="end" >
+    <div style="width: 350px; height: 100%; background: lightgray">
+      LALALAL
     </div>
-    <div style="margin-top: 2em">
-      <bom-recipe-hops [editable]="editable" *ngIf="editable"></bom-recipe-hops>
-    </div>
-  </md-card-content>
-</md-card>
+  </md-sidenav>
+  <md-toolbar color="accent">
+    <img src="favicon.ico" style="width: 50px"/> BoM <i class="fa fa-chevron-right"></i> {{editable?.recipe.name}}
+    <div  style="flex: 1 1 auto"></div>
+    <div id="my-signin2"></div>
+  </md-toolbar>
+  <md-card>
+    <!--<md-card-header>
+      {{editable?.recipe.name}}
+    </md-card-header>-->
+    <md-card-content>
+      <bom-recipe-general [editable]="editable" *ngIf="editable"></bom-recipe-general>
+      <div style="margin-top: 1em">
+        <bom-recipe-grains [editable]="editable" *ngIf="editable"></bom-recipe-grains>
+      </div>
+      <div style="margin-top: 2em">
+        <bom-recipe-hops [editable]="editable" *ngIf="editable"></bom-recipe-hops>
+      </div>
+    </md-card-content>
+  </md-card>
+</md-sidenav-container>

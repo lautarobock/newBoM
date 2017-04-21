@@ -1,14 +1,24 @@
-<div style="display: flex; flex-wrap: wrap" infinite-scroll (scrolled)="onScroll()" (immediateCheck)="true">
-  <span *ngFor="let recipe of recipes" style="flex: 1 1;" class="recipe-item" routerLink="/recipe/{{recipe._id}}">
-    <md-card style="height: 200px; overflow: hidden;padding: 5px;text-align: center;">
-      <!--<a  href="/recipe/{{recipe._id}}" style="text-decoration: none">-->
+
+<md-sidenav-container fullscreen>
+  <md-sidenav #sidenav mode="side" opened="false" align="end" >
+    <div style="width: 350px; height: 100%; background: lightgray">
+      LALALAL
+    </div>
+  </md-sidenav>
+  <md-toolbar color="accent">
+    <img src="favicon.ico" style="width: 50px"/> BoM <i class="fa fa-chevron-right"></i> Mis Recetas
+    <div  style="flex: 1 1 auto"></div>
+    <div id="my-signin2"></div>
+  </md-toolbar>
+  <div style="display: flex; flex-wrap: wrap" infinite-scroll (scrolled)="onScroll()" (immediateCheck)="true">
+    <span *ngFor="let recipe of recipes" style="flex: 1 1;" class="recipe-item" routerLink="/recipe/{{recipe._id}}">
+      <md-card style="height: 200px; overflow: hidden;padding: 5px;text-align: center;">
         <i class="fa fa-beer" style="font-size: 40px" [style.color]="recipe.CALCCOLOUR | srm2Rgb"></i>
         <h3 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{recipe.NAME}}">{{recipe.code}} - {{recipe.NAME}}</h3>
-      <!--</a>-->
-      <p>{{recipe.STYLE.NAME}} </p>
-      <p><b>OG</b>: {{recipe.OG}} <b>ABV</b>: {{recipe.ABV}}%</p>
-      <p><b>IBUs</b>: {{recipe.CALCIBU}} <b>Batch</b>: {{recipe.BATCH_SIZE}}%</p>
-      
-    </md-card>
-  </span>
-</div>
+        <p>{{recipe.STYLE.NAME}} </p>
+        <p><b>OG</b>: {{recipe.OG}} <b>ABV</b>: {{recipe.ABV}}%</p>
+        <p><b>IBUs</b>: {{recipe.CALCIBU}} <b>Batch</b>: {{recipe.BATCH_SIZE}}%</p>
+      </md-card>
+    </span>
+  </div>  
+</md-sidenav-container>
