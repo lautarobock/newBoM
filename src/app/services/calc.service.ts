@@ -1,4 +1,4 @@
-import { Fermentable, Hop, HopForm, HopUse } from '../domain/recipe';
+import { Fermentable, FermentableType, Hop, HopForm, HopUse } from '../domain/recipe';
 import { Injectable } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'lodash';
@@ -311,16 +311,24 @@ export class CalcService {
     return ibus / this.gravity2Ppg(og);
   }
 
-  og(batchSize: number, efficiency: number, fermentables: Fermentable[]) {
+  og(batchSize: number, efficiency: number, fermentables: Fermentable[], excludeSugar = false) {
     return this.ppg2Gravity(
       _.sumBy(fermentables, f => {
-        return this.kg2lbs(f.amount) * this.gravity2Ppg(f.potential) * (efficiency / 100) / this.lts2Gal(batchSize);
+        let v = 0;
+        if (!excludeSugar || f.type.toString() !== FermentableType[FermentableType.Sugar]) {
+          v = this.kg2lbs(f.amount) * this.gravity2Ppg(f.potential) * (efficiency / 100) / this.lts2Gal(batchSize);
+        }
+        return v;
       })
     );
   }
 
-  singleIbu(hop: Hop, og: number, batchSize: number) {
-    let U = this.calculateU(og, hop.time);
+  ibu(hops: Hop[], ogNoSugar: number, batchSize: number) {
+    return _.sum(hops.map(h=>this.singleIbu(h,ogNoSugar,batchSize)));
+  }
+
+  singleIbu(hop: Hop, ogNoSugar: number, batchSize: number) {
+    let U = this.calculateU(ogNoSugar, hop.time);
     let baseIBU = this.kg2Oz(hop.amount) * hop.alpha * U * (7489 / 100) / this.lts2Gal(batchSize);
     return baseIBU * this.getUtilization(hop.use.toString()) * this.getUtilization(hop.form.toString());
   }

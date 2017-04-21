@@ -20,7 +20,7 @@ export class RecipeHopsComponent extends RecipeSection implements OnInit {
   ngOnInit() {
     this.forms = this.util.enumValues(HopForm);
     this.uses = this.util.enumValues(HopUse);
-    this.times = [-30,-25,-20,-15,-10,-5,0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,90,100,110,120];
+    this.times = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,90,100,110,120];
   }
 
   changeHop(hop: Hop,value: number) {
@@ -29,9 +29,10 @@ export class RecipeHopsComponent extends RecipeSection implements OnInit {
   }
 
   ibus(hop: Hop) {
+    let ogNoSugar = this.calcService.og(this.editable.recipe.vital.batchSize,this.editable.recipe.vital.efficiency,this.editable.recipe.fermentables, true);
     return this.calcService.singleIbu(
       hop,
-      this.editable.recipe.vital.og,
+      ogNoSugar,
       this.editable.recipe.vital.batchSize
     );
   }

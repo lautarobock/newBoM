@@ -30,7 +30,10 @@ export class ChangeService {
       );
     });
 
-    // this.add()
+    this.add('vital.ibu', ['vital.og', 'vital.batchSize','hop.amount','hop.alpha', 'hop.use', 'hop.time', 'hop.form'], (editable:EditableRecipe) => {
+      let ogNoSugar = this.calcService.og(editable.recipe.vital.batchSize,editable.recipe.vital.efficiency,editable.recipe.fermentables, true);
+      editable.recipe.vital.ibu = this.calcService.ibu(editable.recipe.hops, ogNoSugar, editable.recipe.vital.batchSize);
+    });
 
     this.add('amoutFermentables', ['fermentable.amount'], (editable: EditableRecipe) => {
       editable.recipe.amountFermentables = _.sumBy(editable.recipe.fermentables, f => f.amount);

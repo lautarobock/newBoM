@@ -106,7 +106,7 @@ export class RecipeConverter {
                 return {
                     name: f.NAME,
                     amount: f.AMOUNT,
-                    type: f.TYPE, 
+                    type: f.NAME.toLowerCase().indexOf('sugar') !== -1 ? 'Sugar':'Grain', 
                     srm: f.COLOR,
                     potential: f.POTENTIAL,
                     use: f.USE,
