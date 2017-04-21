@@ -9,6 +9,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 import { ServicesModule } from '../../services/services.module';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { RouterModule, Routes } from '@angular/router';
+import { RecipeHopsComponent } from './recipe-view/recipe-hops/recipe-hops.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
     FlexLayoutModule,
     ServicesModule,
     InfiniteScrollModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     RecipeViewRouteDecorator, 
@@ -28,7 +31,7 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
     RecipeViewRouteDecorator, 
     RecipeGeneralComponent, 
     RecipeGrainsComponent, 
-    RecipesListComponent
+    RecipesListComponent, RecipeHopsComponent
   ]
 })
 export class RecipesModule { }

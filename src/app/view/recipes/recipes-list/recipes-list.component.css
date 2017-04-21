@@ -1,0 +1,21 @@
+.recipe-item {
+    cursor: pointer;
+}
+
+@media (min-width: 650px) {
+    .recipe-item {
+        min-width: 300px; 
+        width: 300px;
+        max-width: 300px; 
+        margin: 10px 10px 0 0
+    }
+}
+
+@media (max-width: 650px) {
+    .recipe-item {
+        min-width: 100%; 
+        width: 100%;
+        max-width: 100%; 
+        margin: 10px 10px 0 0
+    }
+}

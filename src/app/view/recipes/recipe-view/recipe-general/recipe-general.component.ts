@@ -1,3 +1,4 @@
+import { Recipe, EditableRecipe } from '../../../../domain/recipe';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RecipeGeneralComponent implements OnInit {
 
-  @Input() recipe;
+  @Input() editable : EditableRecipe;
 
   constructor() { }
 

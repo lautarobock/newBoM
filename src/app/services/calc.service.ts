@@ -21,12 +21,37 @@ export class CalcService {
     }
   };
 
+  gravity2Ppg(gravity) {
+    return gravity * 1000 - 1000;
+  }
+
+  lts2Gal(liters) {
+      return liters * 0.264172052637296;
+  }
+
+  kg2lbs(value: number) {
+    return value / 0.45359;
+  }
+
+  ppg2Gravity(ppg: number) {
+    return this.round((ppg + 1000) / 1000, 1000);
+  }
+
+  abv(og, fg) {
+    return (this.gravity2Ppg(og)-this.gravity2Ppg(fg)) * 0.131;
+  }
+
+  bv(og, fg, ibu) {
+    let rte = 0.82 * this.gravity2Ppg(fg) + 0.18 * this.gravity2Ppg(og) ;
+    return 0.8 * ibu / rte;
+  }
+
   balance(ibus, og) {
     return ibus/this.gravity2Ppg(og);
   }
 
-  gravity2Ppg(gravity) {
-    return gravity * 1000 - 1000;
+  round (value, zeros) {
+      return Math.round(value*zeros)/zeros;
   }
 
 }
