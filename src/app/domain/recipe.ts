@@ -6,8 +6,10 @@ export class Recipe {
         public name: string,
         public style: string,
         public vital: Vital,
-        public amoutFermentables: number,
-        public fermentables: Fermentable[]
+        public amountFermentables: number,
+        public fermentables: Fermentable[],
+        public amountHops: number,
+        public hops: Hop[]
     ) {}
 
     
@@ -45,6 +47,28 @@ export enum FermentableUse {
     Mash, Recirculating, Boil, Fermentation, Maduration
 }
 
+export class Hop {
+    constructor(
+        public name: string,
+        public alpha: number,
+        public beta: number,
+        public cohumulone: number,
+        public amount: number,
+        public use: HopUse,
+        public temperature: number, //mas que nada para Arome, a que temperatura se hizo el uso del lupulo. 
+        public time: number, //Tiempo de hervor, salvo DryHop que seria tiempo en dias, y Arome, que seria tiempo de contacto post enfriado (Para estos ultimos quiza deberia usar negativos)
+        public form: HopForm
+    ) {}
+}
+
+export enum HopUse {
+    Mash, FWH, Boil, Aroma, DryHop
+}
+
+export enum HopForm {
+    Pellet, WholeLeaf, Plug
+}
+
 export class EditableRecipe {
 
     constructor(
@@ -77,7 +101,7 @@ export class RecipeConverter {
                 bv: this.recipe.BV,
                 efficiency: this.recipe.EFFICIENCY
             },
-            amoutFermentables: this.recipe.totalAmount,
+            amountFermentables: this.recipe.totalAmount,
             fermentables: this.recipe.FERMENTABLES.FERMENTABLE.map(f => {
                 return {
                     name: f.NAME,
@@ -87,7 +111,22 @@ export class RecipeConverter {
                     potential: f.POTENTIAL,
                     use: f.USE,
                 }
+            }),
+            amountHops: this.recipe.totalHop,
+            hops: this.recipe.HOPS.HOP.map(h => {
+                return {
+                    name: h.NAME,
+                    alpha: h.ALPHA,
+                    beta: null,
+                    cohumulone: null,
+                    amount: h.AMOUNT,
+                    use: h.USE, 
+                    temperature: null, 
+                    time: h.TIME, 
+                    form: h.FORM
+                }
             })
         };
     }
 }
+           

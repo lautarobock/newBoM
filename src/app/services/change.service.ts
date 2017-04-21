@@ -23,19 +23,21 @@ export class ChangeService {
     });
 
     this.add('vital.og', ['vital.batchSize', 'vital.efficiency', 'fermentable.potential', 'fermentable.amount'], (editable: EditableRecipe) => {
-      // editable.recipe.vital.og = this.calcService.ppg2Gravity(70 * editable.recipe.vital.efficiency/100);
-      let og = 0;
-      editable.recipe.fermentables.forEach(f => {
-          og += this.calcService.kg2lbs(f.amount) *
-              this.calcService.gravity2Ppg(f.potential) *
-              (editable.recipe.vital.efficiency/100) /
-              this.calcService.lts2Gal(editable.recipe.vital.batchSize);
-      });
-      editable.recipe.vital.og = this.calcService.ppg2Gravity(og);
+      editable.recipe.vital.og = this.calcService.og(
+        editable.recipe.vital.batchSize, 
+        editable.recipe.vital.efficiency, 
+        editable.recipe.fermentables
+      );
     });
 
+    // this.add()
+
     this.add('amoutFermentables', ['fermentable.amount'], (editable: EditableRecipe) => {
-      editable.recipe.amoutFermentables = _.sumBy(editable.recipe.fermentables, f => f.amount);
+      editable.recipe.amountFermentables = _.sumBy(editable.recipe.fermentables, f => f.amount);
+    });
+
+    this.add('amoutHops', ['hop.amount'], (editable: EditableRecipe) => {
+      editable.recipe.amountHops = _.sumBy(editable.recipe.hops, h => h.amount);
     });
   }
 

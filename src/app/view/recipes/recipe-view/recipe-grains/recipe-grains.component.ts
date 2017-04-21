@@ -1,3 +1,5 @@
+import { Util } from '../../../../services/util.service';
+import { RecipeSection } from '../recipe-section.component';
 import { EditableRecipe, FermentableUse } from '../../../../domain/recipe';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -6,18 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './recipe-grains.component.html',
   styleUrls: ['./recipe-grains.component.css']
 })
-export class RecipeGrainsComponent implements OnInit {
+export class RecipeGrainsComponent extends RecipeSection implements OnInit {
 
-  @Input() editable : EditableRecipe;
   uses: string[] = [];
   
-  constructor() { }
+  constructor(private util: Util) { super(); }
 
   ngOnInit() {
-    for ( let i in FermentableUse ) {
-      this.uses.push(FermentableUse[i]);
-    }
-    this.uses = this.uses.slice(0, this.uses.length/2);
+    this.uses = this.util.enumValues(FermentableUse);
   }
 
 }

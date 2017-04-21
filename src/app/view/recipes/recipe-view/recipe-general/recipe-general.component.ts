@@ -1,3 +1,4 @@
+import { RecipeSection } from '../recipe-section.component';
 import { Recipe, EditableRecipe } from '../../../../domain/recipe';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -6,11 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './recipe-general.component.html',
   styleUrls: ['./recipe-general.component.css']
 })
-export class RecipeGeneralComponent implements OnInit {
+export class RecipeGeneralComponent extends RecipeSection implements OnInit {
 
-  @Input() editable : EditableRecipe;
-
-  constructor() { }
+  constructor() { super(); }
 
   ngOnInit() {
   }
