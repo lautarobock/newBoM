@@ -87,6 +87,9 @@ let defaultRecipe = {
     STYLE: {}
 }
 
+/**
+ * @todo add missing fields.
+ */
 export class Bom1Recipe implements Recipe {
 
     constructor(private obj: any = defaultRecipe, private calcService: CalcService) {}
