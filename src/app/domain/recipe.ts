@@ -88,7 +88,7 @@ let defaultRecipe = {
 }
 
 /**
- * @todo add missing fields.
+ * @todo #3:15m/DEV add missing fields.
  */
 export class Bom1Recipe implements Recipe {
 
