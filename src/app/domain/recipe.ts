@@ -141,6 +141,9 @@ export class Bom1Vital implements Vital {
     }
 }
 
+/**
+ * @todo #INIT finish Recipe interface
+ */
 export interface Recipe {
     name: string;
     style: string;
