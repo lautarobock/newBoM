@@ -1,3 +1,4 @@
+[![PDD status](http://www.0pdd.com/svg?name=lautarobock/newBoM)](http://www.0pdd.com/p?name=lautarobock/newBoM)
 # NewBoM
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
