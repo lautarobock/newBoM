@@ -1,11 +1,11 @@
 import { ChangeService } from '../services/change.service';
 import { CalcService } from '../services/calc.service';
-export class Recipe {
+export class DefaultRecipe {
 
     constructor(
         public name: string,
         public style: string,
-        public vital: Vital,
+        public vital: DefaultVital,
         public amountFermentables: number,
         public fermentables: Fermentable[],
         public amountHops: number,
@@ -15,7 +15,7 @@ export class Recipe {
     
 }
 
-export class Vital {
+export class DefaultVital {
     constructor(
         public batchSize: number,
         public og: number,
@@ -72,7 +72,7 @@ export enum HopForm {
 export class EditableRecipe {
 
     constructor(
-        public recipe: Recipe,
+        public recipe: DefaultRecipe,
         private calcService: CalcService,
         private changeService: ChangeService
     ) {}
@@ -83,11 +83,87 @@ export class EditableRecipe {
     }
 }
 
+let defaultRecipe = {
+    STYLE: {}
+}
+
+export class Bom1Recipe implements Recipe {
+
+    constructor(private obj: any = defaultRecipe, private calcService: CalcService) {}
+
+    get name(): string {
+        return this.obj.NANE;
+    }
+    set name(value: string) {
+        this.obj.NAME = value;
+    }
+    get style(): string {
+        return this.obj.STYLE.NAME;
+    }
+    set style(value: string) {
+        this.obj.STYLE.NAME = value;
+    }
+    get vital(): DefaultVital {
+        return new Bom1Vital(this.obj, this.calcService);
+    }
+    //@todo add missing fields
+}
+
+export class Bom1Vital implements Vital {
+    constructor(private obj: any, private calcService: CalcService) {}
+
+    get batchSize(): number {
+        return this.obj.BATCH_SIZE;
+    }
+    get og(): number {
+        return this.obj.OG;
+    }
+    get fg(): number {
+        return this.obj.FG;
+    }
+    get abv(): number {
+        return this.obj.AVB;
+    }
+    get ibu(): number {
+        return this.obj.CALCIBU;
+    }
+    get bugu(): number {
+        return this.calcService.balance(this.obj.CALCIBU,this.obj.OG);
+    }
+    get efficiency(): number {
+        return this.obj.EFFICIENCY;
+    }
+    get bv(): number {
+        return this.obj.BV;
+    }
+}
+
+export interface Recipe {
+    name: string;
+    style: string;
+    vital: DefaultVital;
+    // amountFermentables: number;
+    // fermentables: Fermentable[];
+    // amountHops: number;
+    // hops: Hop[];
+}
+
+export interface Vital {
+    batchSize: number;
+    og: number;
+    fg: number;
+    abv: number;
+    ibu: number;
+    bugu: number;
+    efficiency: number;
+    bv: number;
+}
+
 export class RecipeConverter {
 
     constructor(private recipe: any, private calcService: CalcService) {}
 
-    convert(): Recipe {
+    convert(): DefaultRecipe {
         return {
             name: this.recipe.NAME,
             style: this.recipe.STYLE.NAME,

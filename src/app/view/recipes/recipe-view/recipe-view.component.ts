@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Rx';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { ChangeService } from '../../../services/change.service';
 import { CalcService } from '../../../services/calc.service';
-import { Recipe, EditableRecipe, RecipeConverter } from '../../../domain/recipe';
+import { DefaultRecipe, EditableRecipe, RecipeConverter } from '../../../domain/recipe';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { RecipesService } from '../../../services/recipes.service';
 import { Component, OnInit, Input } from '@angular/core';
