@@ -3,6 +3,11 @@ import { EditableRecipe } from '../domain/recipe';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
+/**
+ * @todo #INMUTABLE: convert to inmutable, 
+ *  extract constructor to config or similar class
+ *  ver en el blog como maneja la DI
+ */
 @Injectable()
 export class ChangeService {
 
