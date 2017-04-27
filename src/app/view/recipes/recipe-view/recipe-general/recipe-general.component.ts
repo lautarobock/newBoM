@@ -1,5 +1,4 @@
 import { RecipeSection } from '../recipe-section.component';
-import { DefaultRecipe, EditableRecipe } from '../../../../domain/recipe';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

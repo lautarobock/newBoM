@@ -10,9 +10,9 @@ export class ChangeService {
 
   constructor(private calcService: CalcService) {
 
-    this.add('vital.bugu', ['vital.og', 'vital.ibu'], (editable: EditableRecipe) => {
-      editable.recipe.vital.bugu = this.calcService.balance(editable.recipe.vital.ibu, editable.recipe.vital.og);
-    });
+    // this.add('vital.bugu', ['vital.og', 'vital.ibu'], (editable: EditableRecipe) => {
+    //   editable.recipe.vital.bugu = this.calcService.balance(editable.recipe.vital.ibu, editable.recipe.vital.og);
+    // });
 
     this.add('vital.bv', ['vital.og', 'vital.fg', 'vital.ibu'], (editable: EditableRecipe) => {
       editable.recipe.vital.bv = this.calcService.bv(editable.recipe.vital.og, editable.recipe.vital.fg, editable.recipe.vital.ibu);
@@ -21,7 +21,7 @@ export class ChangeService {
     this.add('vital.abv', ['vital.og', 'vital.fg'], (editable: EditableRecipe) => {
       editable.recipe.vital.abv = this.calcService.abv(editable.recipe.vital.og, editable.recipe.vital.fg);
     });
-
+    
     this.add(
       'vital.og',
       ['vital.batchSize', 'vital.efficiency', 'fermentable.potential', 'fermentable.amount'],

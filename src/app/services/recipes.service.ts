@@ -10,11 +10,11 @@ export class RecipesService {
   constructor(private http: Http, private sessionService: SessionService) { }
 
   myRecipes(limit: number = 25, skip: number = 0, sort: string = '-code') {
-    return this.http.get(`${RecipesService.BASE_URL}/recipe
-      ?google_id=${this.sessionService.token()}
-      &limit=${limit}
-      &skip=${skip}
-      &sort=${sort}`).map(res => res.json());
+    return this.http.get(`${RecipesService.BASE_URL}/recipe` +
+      `?google_id=${this.sessionService.token()}` +
+      `&limit=${limit}` +
+      `&skip=${skip}` +
+      `&sort=${sort}`).map(res => res.json());
   }
 
   get(id: string) {
