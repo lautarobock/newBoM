@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'lodash';
 
+/**
+ * @todo #INMUTABLE: convert calcuations to inmutable objects
+ */
 @Injectable()
 export class CalcService {
 
