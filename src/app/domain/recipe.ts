@@ -12,7 +12,7 @@ export class DefaultRecipe {
         public hops: Hop[]
     ) {}
 
-    
+
 }
 
 export class DefaultVital {
@@ -32,10 +32,10 @@ export class Fermentable {
     constructor(
         public name: string,
         public amount: number,
-        public type: FermentableType, //Adjunct, Extract, Grain, Sugar
+        public type: FermentableType, // Adjunct, Extract, Grain, Sugar
         public srm: number,
         public potential: number,
-        public use: FermentableUse //Boil, etc
+        public use: FermentableUse // Boil, etc
     ) {}
 }
 
@@ -55,8 +55,8 @@ export class Hop {
         public cohumulone: number,
         public amount: number,
         public use: HopUse,
-        public temperature: number, //mas que nada para Arome, a que temperatura se hizo el uso del lupulo. 
-        public time: number, //Tiempo de hervor, salvo DryHop que seria tiempo en dias, y Arome, que seria tiempo de contacto post enfriado (Para estos ultimos quiza deberia usar negativos)
+        public temperature: number, // mas que nada para Arome, a que temperatura se hizo el uso del lupulo.
+        public time: number,
         public form: HopForm
     ) {}
 }
@@ -78,14 +78,14 @@ export class EditableRecipe {
     ) {}
 
     change(field: string) {
-        console.log('change', field)
+        console.log('change', field);
         this.changeService.change(field, this);
     }
 }
 
-let defaultRecipe = {
+const defaultRecipe = {
     STYLE: {}
-}
+};
 
 /**
  * @todo #3:15m/DEV add missing fields.
@@ -109,7 +109,6 @@ export class Bom1Recipe implements Recipe {
     get vital(): DefaultVital {
         return new Bom1Vital(this.obj, this.calcService);
     }
-    //@todo add missing fields
 }
 
 export class Bom1Vital implements Vital {
@@ -131,7 +130,7 @@ export class Bom1Vital implements Vital {
         return this.obj.CALCIBU;
     }
     get bugu(): number {
-        return this.calcService.balance(this.obj.CALCIBU,this.obj.OG);
+        return this.calcService.balance(this.obj.CALCIBU, this.obj.OG);
     }
     get efficiency(): number {
         return this.obj.EFFICIENCY;
@@ -178,7 +177,7 @@ export class RecipeConverter {
                 og: this.recipe.OG,
                 fg: this.recipe.FG,
                 abv: this.recipe.ABV,
-                bugu: this.calcService.balance(this.recipe.CALCIBU,this.recipe.OG),
+                bugu: this.calcService.balance(this.recipe.CALCIBU, this.recipe.OG),
                 ibu: this.recipe.CALCIBU,
                 bv: this.recipe.BV,
                 efficiency: this.recipe.EFFICIENCY
@@ -188,11 +187,11 @@ export class RecipeConverter {
                 return {
                     name: f.NAME,
                     amount: f.AMOUNT,
-                    type: f.NAME.toLowerCase().indexOf('sugar') !== -1 ? 'Sugar':'Grain', 
+                    type: f.NAME.toLowerCase().indexOf('sugar') !== -1 ? 'Sugar' : 'Grain',
                     srm: f.COLOR,
                     potential: f.POTENTIAL,
                     use: f.USE,
-                }
+                };
             }),
             amountHops: this.recipe.totalHop,
             hops: this.recipe.HOPS.HOP.map(h => {
@@ -202,13 +201,12 @@ export class RecipeConverter {
                     beta: null,
                     cohumulone: null,
                     amount: h.AMOUNT,
-                    use: h.USE, 
-                    temperature: null, 
-                    time: h.TIME, 
+                    use: h.USE,
+                    temperature: null,
+                    time: h.TIME,
                     form: h.FORM
-                }
+                };
             })
         };
     }
 }
-           

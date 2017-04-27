@@ -6,9 +6,9 @@ import * as _ from 'lodash';
 @Injectable()
 export class CalcService {
 
-  private static readonly SRM = ['#FFFFFF', 'FFE699', '#FFD878', '#FFCA5A', '#FFBF42', '#FBB123', '#F8A600', '#F39C00', '#EA8F00', '#E58500', '#DE7C00',
-    '#D77200', '#CF6900', '#CB6200', '#C35900', '#BB5100', '#B54C00', '#B04500', '#A63E00', '#A13700', '#9B3200',
-    '#952D00', '#8E2900', '#882300', '#821E00', '#7B1A00', '#771900', '#701400', '#6A0E00', '#660D00', '#5E0B00',
+  private static readonly SRM = ['#FFFFFF', 'FFE699', '#FFD878', '#FFCA5A', '#FFBF42', '#FBB123', '#F8A600', '#F39C00', '#EA8F00',
+    '#E58500', '#DE7C00', '#D77200', '#CF6900', '#CB6200', '#C35900', '#BB5100', '#B54C00', '#B04500', '#A63E00', '#A13700',
+    '#9B3200', '#952D00', '#8E2900', '#882300', '#821E00', '#7B1A00', '#771900', '#701400', '#6A0E00', '#660D00', '#5E0B00',
     '#5A0A02', '#600903', '#520907', '#4C0505', '#470606', '#440607', '#3F0708', '#3B0607', '#3A070B', '#36080A'];
   private static readonly U_gravity = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
   private static readonly U = {
@@ -270,9 +270,9 @@ export class CalcService {
 
   srm2Rgb(srm: number): string {
     if (srm > 40) {
-      return "black";
+      return 'black';
     } else if (srm < 1) {
-      return "white";
+      return 'white';
     } else {
       return CalcService.SRM[Math.round(srm)];
     }
@@ -303,7 +303,7 @@ export class CalcService {
   }
 
   bv(og, fg, ibu) {
-    let rte = 0.82 * this.gravity2Ppg(fg) + 0.18 * this.gravity2Ppg(og);
+    const rte = 0.82 * this.gravity2Ppg(fg) + 0.18 * this.gravity2Ppg(og);
     return 0.8 * ibu / rte;
   }
 
@@ -324,33 +324,33 @@ export class CalcService {
   }
 
   ibu(hops: Hop[], ogNoSugar: number, batchSize: number) {
-    return _.sum(hops.map(h=>this.singleIbu(h,ogNoSugar,batchSize)));
+    return _.sum(hops.map(h => this.singleIbu(h, ogNoSugar, batchSize)));
   }
 
   singleIbu(hop: Hop, ogNoSugar: number, batchSize: number) {
-    let U = this.calculateU(ogNoSugar, hop.time);
-    let baseIBU = this.kg2Oz(hop.amount) * hop.alpha * U * (7489 / 100) / this.lts2Gal(batchSize);
+    const U = this.calculateU(ogNoSugar, hop.time);
+    const baseIBU = this.kg2Oz(hop.amount) * hop.alpha * U * (7489 / 100) / this.lts2Gal(batchSize);
     return baseIBU * this.getUtilization(hop.use.toString()) * this.getUtilization(hop.form.toString());
   }
 
   private getUtilization(use: string) {
-    let f = new Map<string,number>();
-    f.set(HopForm[HopForm.Pellet],1);
-    f.set(HopForm[HopForm.WholeLeaf],0.9);
-    f.set(HopForm[HopForm.Plug],0.92);
-    f.set(HopUse[HopUse.Boil],1);
-    f.set(HopUse[HopUse.FWH],1.1);
-    f.set(HopUse[HopUse.DryHop],0);
-    f.set(HopUse[HopUse.Aroma],0.5);
-    f.set(HopUse[HopUse.Mash],0.2);
+    const f = new Map<string, number>();
+    f.set(HopForm[HopForm.Pellet], 1);
+    f.set(HopForm[HopForm.WholeLeaf], 0.9);
+    f.set(HopForm[HopForm.Plug], 0.92);
+    f.set(HopUse[HopUse.Boil], 1);
+    f.set(HopUse[HopUse.FWH], 1.1);
+    f.set(HopUse[HopUse.DryHop], 0);
+    f.set(HopUse[HopUse.Aroma], 0.5);
+    f.set(HopUse[HopUse.Mash], 0.2);
     return f.get(use);
   }
 
   calculateU(gravity, time) {
-    var g = this.gravity2Ppg(gravity);
-    var m = 30;
-    var M = 120;
-    for (var i = 0; i < CalcService.U_gravity.length; i++) {
+    const g = this.gravity2Ppg(gravity);
+    let m = 30;
+    let M = 120;
+    for (let i = 0; i < CalcService.U_gravity.length; i++) {
       if (g < CalcService.U_gravity[i]) {
         M = CalcService.U_gravity[i];
         break;
@@ -358,14 +358,14 @@ export class CalcService {
         m = CalcService.U_gravity[i];
       }
     }
-    var diff = M - m;
-    var p = (g - m) / diff; //proporcion
-    if (p == Infinity || isNaN(p)) {
+    const diff = M - m;
+    let p = (g - m) / diff; // proporcion
+    if (p === Infinity || isNaN(p)) {
       p = 0;
     }
 
-    var valm;
-    var valM;
+    let valm;
+    let valM;
     if (CalcService.U[time.toString()]) {
       valm = CalcService.U[time.toString()][m.toString()];
       valM = CalcService.U[time.toString()][M.toString()];
@@ -374,8 +374,8 @@ export class CalcService {
       valM = 0;
     }
 
-    var valDiff = valM - valm; //Diff de valores
-    var valP = valDiff * p;
+    const valDiff = valM - valm; // Diff de valores
+    const valP = valDiff * p;
     return valm + valP;
   }
 

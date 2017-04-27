@@ -9,7 +9,7 @@ import { ChangeService } from './change.service';
   imports: [
     CommonModule
   ],
-  exports:[Srm2Rgb, Gravity2Ppg],
+  exports: [Srm2Rgb, Gravity2Ppg],
   providers: [RecipesService, CalcService, ChangeService, Util],
   declarations: [Srm2Rgb, Gravity2Ppg]
 })

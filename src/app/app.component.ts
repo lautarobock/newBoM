@@ -1,12 +1,12 @@
 import { SessionService } from './util/session.service';
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'bom-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'NEW BOM';
 
   constructor(private sessionService: SessionService, private ngZone: NgZone) { }

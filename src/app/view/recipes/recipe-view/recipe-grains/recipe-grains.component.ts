@@ -11,7 +11,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RecipeGrainsComponent extends RecipeSection implements OnInit {
 
   uses: string[] = [];
-  
+
   constructor(private util: Util) { super(); }
 
   ngOnInit() {

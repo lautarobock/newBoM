@@ -16,7 +16,7 @@ export class RecipesListComponent implements OnInit {
   scrollWindow = false;
 
   constructor(
-    private sessionService: SessionService, 
+    private sessionService: SessionService,
     private recipesService: RecipesService
   ) { }
 
@@ -39,7 +39,9 @@ export class RecipesListComponent implements OnInit {
       }
       this.skip += this.limit;
       this.more = recipes.length !== 0;
-      if ( !this.containerHasScrollBar() ) this.onScroll();
+      if ( !this.containerHasScrollBar() ) {
+        this.onScroll();
+      }
     });
   }
 

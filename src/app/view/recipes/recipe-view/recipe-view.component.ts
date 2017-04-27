@@ -20,13 +20,13 @@ export class RecipeViewComponent implements OnInit {
   isLtSm: boolean;
 
   constructor(
-    private recipesService: RecipesService, 
+    private recipesService: RecipesService,
     private calcService: CalcService,
     private changeService: ChangeService,
     public media: ObservableMedia
-  ) { 
+  ) {
     this.watcher = media.subscribe((change: MediaChange) => {
-      this.isLtSm = change.mqAlias == 'xs' || change.mqAlias == 'sm';
+      this.isLtSm = change.mqAlias === 'xs' || change.mqAlias === 'sm';
     });
   }
 
@@ -49,6 +49,7 @@ export class RecipeViewComponent implements OnInit {
   selector: 'bom-recipe-view-route',
   template: '<bom-recipe-view [recipeId]="recipeId" *ngIf="recipeId"></bom-recipe-view>'
 })
+// tslint:disable-next-line
 export class RecipeViewRouteDecorator implements OnInit {
 
   recipeId: string;
