@@ -1,43 +1,5 @@
 import { ChangeService } from '../services/change.service';
 import { CalcService } from '../services/calc.service';
-export class DefaultRecipe implements Recipe {
-
-    constructor(
-        public name: string,
-        public style: string,
-        public vital: DefaultVital,
-        public amountFermentables: number,
-        public fermentables: DefaultFermentable[],
-        public amountHops: number,
-        public hops: DefaultHop[]
-    ) {}
-
-
-}
-
-export class DefaultVital implements Vital {
-    constructor(
-        public batchSize: number,
-        public og: number,
-        public fg: number,
-        public abv: number,
-        public ibu: number,
-        public bugu: number,
-        public efficiency: number,
-        public bv: number
-    ) {}
-}
-
-export class DefaultFermentable implements Fermentable {
-    constructor(
-        public name: string,
-        public amount: number,
-        public type: FermentableType, // Adjunct, Extract, Grain, Sugar
-        public srm: number,
-        public potential: number,
-        public use: FermentableUse // Boil, etc
-    ) {}
-}
 
 export enum FermentableType {
     Adjunct, Extract, Grain, Sugar
@@ -45,20 +7,6 @@ export enum FermentableType {
 
 export enum FermentableUse {
     Mash, Recirculating, Boil, Fermentation, Maduration
-}
-
-export class DefaultHop implements Hop {
-    constructor(
-        public name: string,
-        public alpha: number,
-        public beta: number,
-        public cohumulone: number,
-        public amount: number,
-        public use: HopUse,
-        public temperature: number, // mas que nada para Arome, a que temperatura se hizo el uso del lupulo.
-        public time: number,
-        public form: HopForm
-    ) {}
 }
 
 export enum HopUse {
@@ -277,17 +225,14 @@ export class Bom1Hop implements Hop {
     }
 }
 
-/**
- * @todo #INIT finish Recipe interface
- */
 export interface Recipe {
     name: string;
     style: string;
     vital: Vital;
     amountFermentables: number;
-    fermentables: DefaultFermentable[];
+    fermentables: Fermentable[];
     amountHops: number;
-    hops: DefaultHop[];
+    hops: Hop[];
 }
 
 export interface Vital {
@@ -320,51 +265,4 @@ export interface Hop {
     temperature: number;
     time: number;
     form: HopForm;
-}
-
-export class RecipeConverter {
-
-    constructor(private recipe: any, private calcService: CalcService) {}
-
-    convert(): DefaultRecipe {
-        return {
-            name: this.recipe.NAME,
-            style: this.recipe.STYLE.NAME,
-            vital: {
-                batchSize: this.recipe.BATCH_SIZE,
-                og: this.recipe.OG,
-                fg: this.recipe.FG,
-                abv: this.recipe.ABV,
-                bugu: this.calcService.balance(this.recipe.CALCIBU, this.recipe.OG),
-                ibu: this.recipe.CALCIBU,
-                bv: this.recipe.BV,
-                efficiency: this.recipe.EFFICIENCY
-            },
-            amountFermentables: this.recipe.totalAmount,
-            fermentables: this.recipe.FERMENTABLES.FERMENTABLE.map(f => {
-                return {
-                    name: f.NAME,
-                    amount: f.AMOUNT,
-                    type: f.NAME.toLowerCase().indexOf('sugar') !== -1 ? 'Sugar' : 'Grain',
-                    srm: f.COLOR,
-                    potential: f.POTENTIAL,
-                    use: f.USE,
-                };
-            }),
-            amountHops: this.recipe.totalHop,
-            hops: this.recipe.HOPS.HOP.map(h => {
-                return {
-                    name: h.NAME,
-                    alpha: h.ALPHA,
-                    beta: null,
-                    cohumulone: null,
-                    amount: h.AMOUNT,
-                    use: h.USE,
-                    temperature: null,
-                    time: h.TIME,
-                    form: h.FORM
-                };
-            })
-        };
-    }
 }
