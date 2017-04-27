@@ -21,7 +21,7 @@ export class ChangeService {
     this.add('vital.abv', ['vital.og', 'vital.fg'], (editable: EditableRecipe) => {
       editable.recipe.vital.abv = this.calcService.abv(editable.recipe.vital.og, editable.recipe.vital.fg);
     });
-    
+
     this.add(
       'vital.og',
       ['vital.batchSize', 'vital.efficiency', 'fermentable.potential', 'fermentable.amount'],

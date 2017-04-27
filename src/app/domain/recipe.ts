@@ -1,6 +1,48 @@
 import { ChangeService } from '../services/change.service';
 import { CalcService } from '../services/calc.service';
 
+export interface Recipe {
+    name: string;
+    style: string;
+    vital: Vital;
+    amountFermentables: number;
+    fermentables: Fermentable[];
+    amountHops: number;
+    hops: Hop[];
+}
+
+export interface Vital {
+    batchSize: number;
+    og: number;
+    fg: number;
+    abv: number;
+    ibu: number;
+    bugu: number;
+    efficiency: number;
+    bv: number;
+}
+
+export interface Fermentable {
+    name: string;
+    amount: number;
+    type: FermentableType;
+    srm: number;
+    potential: number;
+    use: FermentableUse;
+}
+
+export interface Hop {
+    name: string;
+    alpha: number;
+    beta: number;
+    cohumulone: number;
+    amount: number;
+    use: HopUse;
+    temperature: number;
+    time: number;
+    form: HopForm;
+}
+
 export enum FermentableType {
     Adjunct, Extract, Grain, Sugar
 }
@@ -97,7 +139,7 @@ export class Bom1Vital implements Vital {
     get og(): number {
         return this.obj.OG;
     }
-    set og(value : number) {
+    set og(value: number) {
         this.obj.OG = value;
     }
     get fg(): number {
@@ -136,7 +178,7 @@ export class Bom1Vital implements Vital {
 }
 
 export class Bom1Fermentable implements Fermentable {
-    
+
     constructor(private obj: any, private calcService: CalcService) {}
 
     get name(): string {
@@ -223,46 +265,4 @@ export class Bom1Hop implements Hop {
     set form(value: HopForm) {
         this.obj.FORM = value;
     }
-}
-
-export interface Recipe {
-    name: string;
-    style: string;
-    vital: Vital;
-    amountFermentables: number;
-    fermentables: Fermentable[];
-    amountHops: number;
-    hops: Hop[];
-}
-
-export interface Vital {
-    batchSize: number;
-    og: number;
-    fg: number;
-    abv: number;
-    ibu: number;
-    bugu: number;
-    efficiency: number;
-    bv: number;
-}
-
-export interface Fermentable {
-    name: string;
-    amount: number;
-    type: FermentableType;
-    srm: number;
-    potential: number;
-    use: FermentableUse;
-}
-
-export interface Hop {
-    name: string;
-    alpha: number;
-    beta: number;
-    cohumulone: number;
-    amount: number;
-    use: HopUse;
-    temperature: number;
-    time: number;
-    form: HopForm;
 }
