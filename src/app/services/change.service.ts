@@ -1,40 +1,31 @@
 import { CalcService } from './calc.service';
-import { EditableRecipe } from '../domain/recipe';
+import { Recipe } from '../domain/recipe';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
-/**
- * @todo #INMUTABLE: convert to inmutable, 
- *  extract constructor to config or similar class
- *  ver en el blog como maneja la DI
- */
 @Injectable()
 export class ChangeService {
 
-  map = new Map<string, ((recipe: EditableRecipe) => any)[]>();
+  map = new Map<string, ((recipe: Recipe) => any)[]>();
 
   constructor(private calcService: CalcService) {
 
-    // this.add('vital.bugu', ['vital.og', 'vital.ibu'], (editable: EditableRecipe) => {
-    //   editable.recipe.vital.bugu = this.calcService.balance(editable.recipe.vital.ibu, editable.recipe.vital.og);
-    // });
-
-    this.add('vital.bv', ['vital.og', 'vital.fg', 'vital.ibu'], (editable: EditableRecipe) => {
-      editable.recipe.vital.bv = this.calcService.bv(editable.recipe.vital.og, editable.recipe.vital.fg, editable.recipe.vital.ibu);
+    this.add('vital.bv', ['vital.og', 'vital.fg', 'vital.ibu'], (recipe: Recipe) => {
+      recipe.vital.bv = this.calcService.bv(recipe.vital.og, recipe.vital.fg, recipe.vital.ibu);
     });
 
-    this.add('vital.abv', ['vital.og', 'vital.fg'], (editable: EditableRecipe) => {
-      editable.recipe.vital.abv = this.calcService.abv(editable.recipe.vital.og, editable.recipe.vital.fg);
+    this.add('vital.abv', ['vital.og', 'vital.fg'], (recipe: Recipe) => {
+      recipe.vital.abv = this.calcService.abv(recipe.vital.og, recipe.vital.fg);
     });
 
     this.add(
       'vital.og',
       ['vital.batchSize', 'vital.efficiency', 'fermentable.potential', 'fermentable.amount'],
-      (editable: EditableRecipe) => {
-        editable.recipe.vital.og = this.calcService.og(
-          editable.recipe.vital.batchSize,
-          editable.recipe.vital.efficiency,
-          editable.recipe.fermentables
+      (recipe: Recipe) => {
+        recipe.vital.og = this.calcService.og(
+          recipe.vital.batchSize,
+          recipe.vital.efficiency,
+          recipe.fermentables
         );
       }
     );
@@ -42,40 +33,40 @@ export class ChangeService {
     this.add(
       'vital.ibu',
       ['vital.og', 'vital.batchSize', 'hop.amount', 'hop.alpha', 'hop.use', 'hop.time', 'hop.form'],
-      (editable: EditableRecipe) => {
+      (recipe: Recipe) => {
         const ogNoSugar = this.calcService.og(
-          editable.recipe.vital.batchSize,
-          editable.recipe.vital.efficiency,
-          editable.recipe.fermentables,
+          recipe.vital.batchSize,
+          recipe.vital.efficiency,
+          recipe.fermentables,
           true
         );
-        editable.recipe.vital.ibu = this.calcService.ibu(editable.recipe.hops, ogNoSugar, editable.recipe.vital.batchSize);
+        recipe.vital.ibu = this.calcService.ibu(recipe.hops, ogNoSugar, recipe.vital.batchSize);
       }
     );
 
-    this.add('amoutFermentables', ['fermentable.amount'], (editable: EditableRecipe) => {
-      editable.recipe.amountFermentables = _.sumBy(editable.recipe.fermentables, f => f.amount);
+    this.add('amoutFermentables', ['fermentable.amount'], (recipe: Recipe) => {
+      recipe.amountFermentables = _.sumBy(recipe.fermentables, f => f.amount);
     });
 
-    this.add('amoutHops', ['hop.amount'], (editable: EditableRecipe) => {
-      editable.recipe.amountHops = _.sumBy(editable.recipe.hops, h => h.amount);
+    this.add('amoutHops', ['hop.amount'], (recipe: Recipe) => {
+      recipe.amountHops = _.sumBy(recipe.hops, h => h.amount);
     });
   }
 
-  change(field: string, editable: EditableRecipe) {
+  change(field: string, recipe: Recipe) {
     if (this.map.has(field)) {
-      this.map.get(field).forEach(calc => calc(editable));
+      this.map.get(field).forEach(calc => calc(recipe));
     }
   }
 
-  add(fieldName: string, depends: string[], calc: (recipe: EditableRecipe) => any) {
+  add(fieldName: string, depends: string[], calc: (recipe: Recipe) => any) {
     depends.forEach(field => {
       if ( !this.map.has(field) ) {
         this.map.set(field, []);
       }
-      this.map.get(field).push((editable: EditableRecipe) => {
-        calc(editable);
-        this.change(fieldName, editable);
+      this.map.get(field).push((recipe: Recipe) => {
+        calc(recipe);
+        this.change(fieldName, recipe);
       });
     });
   }

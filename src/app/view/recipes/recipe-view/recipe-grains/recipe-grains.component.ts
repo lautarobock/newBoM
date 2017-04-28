@@ -1,6 +1,6 @@
-import { Util } from '../../../../services/util.service';
+import { EnumValues } from '../../../../services/util';
 import { RecipeSection } from '../recipe-section.component';
-import { EditableRecipe, FermentableUse } from '../../../../domain/recipe';
+import { FermentableUse } from '../../../../domain/recipe';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,12 +10,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RecipeGrainsComponent extends RecipeSection implements OnInit {
 
-  uses: string[] = [];
+  uses: string[];
 
-  constructor(private util: Util) { super(); }
+  constructor() { super(); }
 
   ngOnInit() {
-    this.uses = this.util.enumValues(FermentableUse);
+    this.uses = new EnumValues(FermentableUse);
   }
 
 }

@@ -2,24 +2,24 @@
   <md-card-content>-->
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
       <md-input-container fxFlex="4 4 auto">
-        <input mdInput placeholder="Nombre" [(ngModel)]="editable.recipe.name" (change)="editable.change('name')">
+        <input mdInput placeholder="Nombre" [(ngModel)]="recipe.name">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto" >
-        <input mdInput placeholder="Batch" type="number" step="0.5" [(ngModel)]="editable.recipe.vital.batchSize" (change)="editable.change('vital.batchSize')">
+        <input mdInput placeholder="Batch" type="number" step="0.5" [(ngModel)]="recipe.vital.batchSize">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto" >
-        <input mdInput placeholder="OG" type="number" disabled step="0.001" [(ngModel)]="editable.recipe.vital.og" (change)="editable.change('vital.og')">
+        <input mdInput placeholder="OG" type="number" disabled step="0.001" [(ngModel)]="recipe.vital.og">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto" >
-        <input mdInput placeholder="IBUs" type="number" disabled [value]="editable.recipe.vital.ibu | number:'1.1-1'">
+        <input mdInput placeholder="IBUs" type="number" disabled [value]="recipe.vital.ibu | number:'1.1-1'">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto" >
-        <input mdInput placeholder="Balance" type="number" disabled [value]="editable.recipe.vital.bv|number:'1.1-2'">
+        <input mdInput placeholder="Balance" type="number" disabled [value]="recipe.vital.bv|number:'1.1-2'">
       </md-input-container>
     </div>
     <div [fxLayout]="'row'" [fxLayout.lt-md]="'column'" [fxLayoutGap]="'10px'">
       <md-input-container fxFlex="4 4 auto">
-        <input mdInput placeholder="Estilo" [mdAutocomplete]="auto" [(ngModel)]="editable.recipe.style">
+        <input mdInput placeholder="Estilo" [mdAutocomplete]="auto" [(ngModel)]="recipe.style">
         <md-autocomplete #auto="mdAutocomplete">
           <md-option value="Dorada pampeana">
             Dorada pampeana
@@ -31,16 +31,16 @@
       </md-input-container>
       
       <md-input-container fxFlex="1 1 auto">
-        <input mdInput placeholder="Eficiencia" type="number" [(ngModel)]="editable.recipe.vital.efficiency" (change)="editable.change('vital.efficiency')">
+        <input mdInput placeholder="Eficiencia" type="number" [(ngModel)]="recipe.vital.efficiency">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto">
-        <input mdInput placeholder="FG" type="number" step="0.001" [(ngModel)]="editable.recipe.vital.fg" (change)="editable.change('vital.fg')">
+        <input mdInput placeholder="FG" type="number" step="0.001" [(ngModel)]="recipe.vital.fg">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto">
-        <input mdInput placeholder="BU/GU" type="number" disabled [value]="editable.recipe.vital.bugu|number:'1.1-2'">
+        <input mdInput placeholder="BU/GU" type="number" disabled [value]="recipe.vital.bugu|number:'1.1-2'">
       </md-input-container>
       <md-input-container fxFlex="1 1 auto">
-        <input mdInput placeholder="Alcohol %" type="number" disabled value="5" [value]="editable.recipe.vital.abv | number:'1.1-2'">
+        <input mdInput placeholder="Alcohol %" type="number" disabled value="5" [value]="recipe.vital.abv | number:'1.1-2'">
       </md-input-container>
     </div>
   <!--</md-card-content>

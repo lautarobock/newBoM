@@ -1,8 +1,12 @@
-import { EditableRecipe } from '../../../domain/recipe';
+import { Recipe } from '../../../domain/recipe';
+
 import { Input } from '@angular/core';
 
 export abstract class RecipeSection {
 
-  @Input() editable: EditableRecipe;
+  /**
+   * @todo #refact: Refactor cada interfaz en su archivo.
+   */
+  @Input() recipe = <Recipe>null;
 
 }

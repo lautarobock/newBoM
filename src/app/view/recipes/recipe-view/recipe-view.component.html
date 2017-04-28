@@ -5,18 +5,18 @@
     </div>
   </md-sidenav>
   <md-toolbar color="accent">
-    <img src="favicon.ico" style="width: 50px"/> BoM <i class="fa fa-chevron-right"></i> {{editable?.recipe.name}}
+    <img src="favicon.ico" style="width: 50px"/> BoM <i class="fa fa-chevron-right"></i> {{recipe?.name}}
     <div  style="flex: 1 1 auto"></div>
     <div id="my-signin2"></div>
   </md-toolbar>
   <md-card>
     <md-card-content>
-      <bom-recipe-general [editable]="editable" *ngIf="editable"></bom-recipe-general>
+      <bom-recipe-general [recipe]="recipe" *ngIf="recipe"></bom-recipe-general>
       <div style="margin-top: 1em">
-        <bom-recipe-grains [editable]="editable" *ngIf="editable"></bom-recipe-grains>
+        <bom-recipe-grains [recipe]="recipe" *ngIf="recipe"></bom-recipe-grains>
       </div>
       <div style="margin-top: 2em">
-        <bom-recipe-hops [editable]="editable" *ngIf="editable"></bom-recipe-hops>
+        <bom-recipe-hops [recipe]="recipe" *ngIf="recipe"></bom-recipe-hops>
       </div>
     </md-card-content>
   </md-card>
