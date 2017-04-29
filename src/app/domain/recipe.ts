@@ -81,6 +81,9 @@ export class Bom1Recipe implements Recipe {
         this._hops = this.obj.HOPS.HOP.map(h => new Bom1Hop(h, this.calcService, this.changeService, this));
         this._vital = new Bom1Vital(this.obj, this.calcService, this.changeService, this);
     }
+    get object(): any {
+        return this.obj;
+    }
 
     get name(): string {
         return this.obj.NAME;
@@ -90,9 +93,10 @@ export class Bom1Recipe implements Recipe {
         this.changeService.change('name', this);
     }
     get style(): string {
-        return this.obj.STYLE.NAME;
+        return this.obj.STYLE? this.obj.STYLE.NAME : null;
     }
     set style(value: string) {
+        this.obj.STYLE = this.obj.STYLE || {};
         this.obj.STYLE.NAME = value;
         this.changeService.change('style', this);
     }

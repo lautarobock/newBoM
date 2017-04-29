@@ -1,11 +1,12 @@
 import { CalcService } from './calc.service';
 import { Recipe } from '../domain/recipe';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
 @Injectable()
 export class ChangeService {
 
+  public onChange = new EventEmitter();
   map = new Map<string, ((recipe: Recipe) => any)[]>();
 
   constructor(private calcService: CalcService) {
@@ -57,6 +58,10 @@ export class ChangeService {
     if (this.map.has(field)) {
       this.map.get(field).forEach(calc => calc(recipe));
     }
+    this.onChange.emit({
+      recipe: recipe,
+      field: field
+    });
   }
 
   add(fieldName: string, depends: string[], calc: (recipe: Recipe) => any) {

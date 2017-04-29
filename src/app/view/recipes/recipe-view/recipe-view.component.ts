@@ -5,19 +5,21 @@ import { CalcService } from '../../../services/calc.service';
 import { Bom1Recipe, Recipe } from '../../../domain/recipe';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { RecipesService } from '../../../services/recipes.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'bom-recipe-view',
   templateUrl: './recipe-view.component.html',
   styleUrls: ['./recipe-view.component.css']
 })
-export class RecipeViewComponent implements OnInit {
+export class RecipeViewComponent implements OnInit, OnDestroy {
 
   @Input() recipeId: string;
-  recipe: Recipe;
+  recipe: Bom1Recipe;
   watcher: Subscription;
   isLtSm: boolean;
+  unsubscribeChange;
+  saveTimer = undefined;
 
   constructor(
     private recipesService: RecipesService,
@@ -34,7 +36,28 @@ export class RecipeViewComponent implements OnInit {
     this.recipesService.get(this.recipeId).subscribe(recipe => {
       this.recipe = new Bom1Recipe(recipe, this.calcService, this.changeService);
     });
+    this.unsubscribeChange = this.changeService.onChange.subscribe((value) => {
+      if ( this.saveTimer ) {
+        clearTimeout(this.saveTimer);
+      }
+      this.saveTimer = setTimeout(() => {
+        this.save();
+        this.saveTimer = undefined;
+      }, 500);
+    });
   }
+
+  ngOnDestroy() {
+    this.unsubscribeChange.unsubscribe();
+  }
+
+  save() {
+    this.recipesService.save(this.recipe.object).subscribe(
+      recipe => this.recipe = new Bom1Recipe(recipe, this.calcService, this.changeService),
+      err => console.log('ERR', err)
+    );
+  }
+
 
 }
 
