@@ -19,7 +19,7 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   watcher: Subscription;
   isLtSm: boolean;
   unsubscribeChange;
-  saveTimer = undefined;
+  progress = 0;
 
   constructor(
     private recipesService: RecipesService,
@@ -36,15 +36,7 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     this.recipesService.get(this.recipeId).subscribe(recipe => {
       this.recipe = new Bom1Recipe(recipe, this.calcService, this.changeService);
     });
-    this.unsubscribeChange = this.changeService.onChange.subscribe((value) => {
-      if ( this.saveTimer ) {
-        clearTimeout(this.saveTimer);
-      }
-      this.saveTimer = setTimeout(() => {
-        this.save();
-        this.saveTimer = undefined;
-      }, 500);
-    });
+    this.unsubscribeChange = this.changeService.onChange((value) => this.save());
   }
 
   ngOnDestroy() {
@@ -52,8 +44,12 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.progress = 10;
     this.recipesService.save(this.recipe.object).subscribe(
-      recipe => this.recipe = new Bom1Recipe(recipe, this.calcService, this.changeService),
+      recipe => {
+        this.recipe.object.version = recipe.version
+        this.progress = 0;
+      },
       err => console.log('ERR', err)
     );
   }

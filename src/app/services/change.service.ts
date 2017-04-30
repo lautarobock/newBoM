@@ -2,12 +2,15 @@ import { CalcService } from './calc.service';
 import { Recipe } from '../domain/recipe';
 import { Injectable, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
+import { Subject } from "rxjs/Subject";
+import 'rxjs/add/operator/debounceTime';
 
 @Injectable()
 export class ChangeService {
 
-  public onChange = new EventEmitter();
+  private _onChange = new EventEmitter();
   map = new Map<string, ((recipe: Recipe) => any)[]>();
+  private changeDebounce = new Subject<{recipe: Recipe, field: string}>();
 
   constructor(private calcService: CalcService) {
 
@@ -52,16 +55,22 @@ export class ChangeService {
     this.add('amoutHops', ['hop.amount'], (recipe: Recipe) => {
       recipe.amountHops = _.sumBy(recipe.hops, h => h.amount);
     });
+
+    this.changeDebounce.debounceTime(500).subscribe(event => this._onChange.emit(event));
   }
 
   change(field: string, recipe: Recipe) {
     if (this.map.has(field)) {
       this.map.get(field).forEach(calc => calc(recipe));
     }
-    this.onChange.emit({
+    this.changeDebounce.next({
       recipe: recipe,
       field: field
     });
+  }
+
+  onChange(cb: (any) => any) {
+    this._onChange.subscribe(cb);
   }
 
   add(fieldName: string, depends: string[], calc: (recipe: Recipe) => any) {

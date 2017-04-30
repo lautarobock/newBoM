@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-page": "ng build --prod --base-href \"https://lautarobock.github.io/newBoM/\"",
-    "publishPage": "ngh"
+    "publishPage": "npm run build-page && ngh"
   },
   "private": true,
   "dependencies": {
