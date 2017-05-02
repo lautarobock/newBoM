@@ -1,6 +1,6 @@
 import { RecipesService } from '../../../services/recipes.service';
 import { SessionService } from '../../../util/session.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 @Component({
   selector: 'bom-recipes-list',
@@ -17,7 +17,8 @@ export class RecipesListComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -54,5 +55,25 @@ export class RecipesListComponent implements OnInit {
   private containerHasScrollBar(): boolean {
     return document.documentElement.scrollHeight > (window.innerHeight + window.pageYOffset);
   }
+
+  /**
+   * @todo #refactor: it should be placed in a common place
+   */
+  ngAfterViewInit() {
+    if (!this.sessionService.token()) {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 110,
+        'height': 35,
+        'longtitle': false,
+        'theme': 'light',
+        'onsuccess': param => this.onSignIn(param)
+      });
+    }
+  }
+
+  public onSignIn(googleUser) {
+    this.ngZone.run(() => this.sessionService.registerGoogleUser(googleUser));
+  };
 
 }
