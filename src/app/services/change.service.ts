@@ -70,7 +70,7 @@ export class ChangeService {
   }
 
   onChange(cb: (any) => any) {
-    this._onChange.subscribe(cb);
+    return this._onChange.subscribe(cb);
   }
 
   add(fieldName: string, depends: string[], calc: (recipe: Recipe) => any) {
