@@ -4,17 +4,17 @@
   },
   "static": {
     "urls": {
-      "https://lautarobock.github.io/newBoM/polyfills.9e9cbe6ad66f4c9cc342.bundle.js": "5598e2c308d50af53e989c5b775e02e313dbdc50",
-      "https://lautarobock.github.io/newBoM/main.83e2b1217f6716d0d31d.bundle.js": "87980efcd5ee6257209d4e4da96123ac276643d7",
+      "https://lautarobock.github.io/newBoM/polyfills.565a8dfb6c57c22c390d.bundle.js": "2cfd6700258ed164b7752c9b3524d4f576b696a0",
+      "https://lautarobock.github.io/newBoM/main.e7747e7c84c3ca3fe031.bundle.js": "0e38b372a126d918a5608e6782778cea90b0b58e",
       "https://lautarobock.github.io/newBoM/sw-register.b73048fe3d9f8a1e7ae5.bundle.js": "a98270c864fc34e37b1d992bfe5994323558c2f8",
-      "https://lautarobock.github.io/newBoM/vendor.f31030e294ba1c240227.bundle.js": "5ab0cbc26cc176bcda8b33f9f777b457326b3dd1",
-      "https://lautarobock.github.io/newBoM/inline.e885fbd3901949b5b151.bundle.js": "7da72942b17b11e8b0a9b6f652109dfe507c94d8",
-      "https://lautarobock.github.io/newBoM/styles.a270cb96692ff0e67b2a.bundle.css": "2fb506a121ed382962e7a679d04bedca0979eb34",
-      "https://lautarobock.github.io/newBoM/assets/images/barley.svg": "5a9712b724d424dd7b586ed11eec6ef822269520",
-      "https://lautarobock.github.io/newBoM/assets/images/hops.svg": "848684f784b274e8f618237ac638a43cb67557d1",
+      "https://lautarobock.github.io/newBoM/vendor.f14c68951561dee54ede.bundle.js": "11b879ef229c3d0a62d346ebc9a07507ef529c1a",
+      "https://lautarobock.github.io/newBoM/inline.904de32730ba324e51cc.bundle.js": "1121f3aeaeff30b0ea8c417a6372e2eea1ee8923",
+      "https://lautarobock.github.io/newBoM/styles.dd5008fd3b6e3aede988.bundle.css": "8ec3bd216c65ff6ea141258982b320af460b0f20",
+      "https://lautarobock.github.io/newBoM/assets/images/barley.svg": "ac9587311baa5caed4181471d0692d23b8103b82",
       "https://lautarobock.github.io/newBoM/favicon.ico": "3c22c11d7018f031555b74e1ec5c9532ff7206b2",
-      "https://lautarobock.github.io/newBoM/manifest.json": "9a83f67ea4ec90aa52541c35d3820b6e07f6756e",
-      "https://lautarobock.github.io/newBoM/index.html": "0ce2d9efb1378485c3d25ce6310d695f7ccbfc70"
+      "https://lautarobock.github.io/newBoM/assets/images/hops.svg": "20df0c89552bde0847b4ff8a51efdaf8c8d1562e",
+      "https://lautarobock.github.io/newBoM/manifest.json": "0f1028b410eed0c1fb13419c0b1fbb3dff3ad816",
+      "https://lautarobock.github.io/newBoM/index.html": "1b0e5717aa0ba65f2a70d7573a1e1c03cfb749d7"
     },
     "_generatedFromWebpack": true
   }
