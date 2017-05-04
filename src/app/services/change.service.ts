@@ -60,6 +60,7 @@ export class ChangeService {
   }
 
   change(field: string, recipe: Recipe) {
+    // console.log(`change ${field}`);
     if (this.map.has(field)) {
       this.map.get(field).forEach(calc => calc(recipe));
     }

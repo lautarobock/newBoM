@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Rx';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { ChangeService } from '../../../services/change.service';
 import { CalcService } from '../../../services/calc.service';
-import { Bom1Recipe, Recipe } from '../../../domain/recipe';
+import { Bom1Fermentable, Bom1Hop, Bom1Recipe, Bom1Vital, Recipe, Vital, Hop, Fermentable } from '../../../domain/recipe';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { RecipesService } from '../../../services/recipes.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
@@ -15,7 +15,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 export class RecipeViewComponent implements OnInit, OnDestroy {
 
   @Input() recipeId: string;
-  recipe: Bom1Recipe;
+  recipe: Recipe;
   watcher: Subscription;
   isLtSm: boolean;
   unsubscribeChange;
@@ -32,9 +32,31 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     });
   }
 
+  private proxy(prefix='') {
+    let cs = this.changeService;
+    let rp = () => this.recipe;
+    return {
+      set: function (target, name: PropertyKey, value: any, receiver: any) {
+        console.log(`Call "${prefix}.${name}" with value "${value}"`);
+        target[name] = value;
+        cs.change(`${prefix}.${name}`, rp());
+        return true;
+      }
+    };
+  }
+
   ngOnInit() {
     this.recipesService.get(this.recipeId).subscribe(recipe => {
-      this.recipe = new Bom1Recipe(recipe, this.calcService, this.changeService);
+      
+      this.recipe = new Proxy<Recipe>(
+        new Bom1Recipe(
+          recipe, 
+          recipe.FERMENTABLES.FERMENTABLE.map(f => new Proxy<Fermentable>(new Bom1Fermentable(f, this.calcService), this.proxy('fermentable'))),
+          recipe.HOPS.HOP.map(h => new Proxy<Hop>(new Bom1Hop(h, this.calcService), this.proxy('hop'))),
+          new Proxy<Vital>(new Bom1Vital(recipe, this.calcService), this.proxy('vital')),
+          this.calcService, 
+        ), this.proxy()
+      );
     });
     this.unsubscribeChange = this.changeService.onChange((value) => this.save());
   }
@@ -44,10 +66,11 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    // sould disable fields in the middle?
     this.progress = 10;
-    this.recipesService.save(this.recipe.object).subscribe(
+    this.recipesService.save((<Bom1Recipe>this.recipe).object).subscribe(
       recipe => {
-        this.recipe.object.version = recipe.version
+        (<Bom1Recipe>this.recipe).object.version = recipe.version
         this.progress = 0;
       },
       err => console.log('ERR', err)
