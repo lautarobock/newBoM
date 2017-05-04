@@ -20,6 +20,9 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   isLtSm: boolean;
   unsubscribeChange;
   progress = 0;
+  context = {
+    advanced: false
+  };
 
   constructor(
     private recipesService: RecipesService,
@@ -30,24 +33,11 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
     this.watcher = media.subscribe((change: MediaChange) => {
       this.isLtSm = change.mqAlias === 'xs' || change.mqAlias === 'sm';
     });
-  }
-
-  private proxy(prefix='') {
-    let cs = this.changeService;
-    let rp = () => this.recipe;
-    return {
-      set: function (target, name: PropertyKey, value: any, receiver: any) {
-        console.log(`Call "${prefix}.${name}" with value "${value}"`);
-        target[name] = value;
-        cs.change(`${prefix}.${name}`, rp());
-        return true;
-      }
-    };
+    this.isLtSm = this.media.isActive('xs') || this.media.isActive('sm');
   }
 
   ngOnInit() {
-    this.recipesService.get(this.recipeId).subscribe(recipe => {
-      
+    this.recipesService.get(this.recipeId).subscribe(recipe => {      
       this.recipe = new Bom1Recipe(
         recipe, 
         this.calcService, 

@@ -7,8 +7,8 @@
       <img src="assets/images/barley.svg" height="25px" fxHide.gt-md="true"/>
       Fermentables
     </h3>
-    <md-list>
-      <md-list-item *ngFor="let fermentable of recipe.fermentables;let first=first">
+    <div>
+      <div *ngFor="let fermentable of recipe.fermentables;let first=first">
           
           <div md-line>
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
@@ -16,10 +16,10 @@
               <md-input-container fxFlex="4 1 auto" [floatPlaceholder]="first?'auto':'never'">
                 <input mdInput placeholder="Nombre" [(ngModel)]="fermentable.name">
               </md-input-container>
-              <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'" fxHide.lt-lg="true">
+              <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'" fxHide.lt-lg="true" *ngIf="context.advanced">
                 <input mdInput placeholder="Extracto" type="number" step="0.001" [(ngModel)]="fermentable.potential">
               </md-input-container>
-              <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'" fxHide.lt-lg="true"> 
+              <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'" fxHide.lt-lg="true" *ngIf="context.advanced"> 
                 <input mdInput placeholder="Color" type="number" step="0.5" [(ngModel)]="fermentable.srm">
               </md-input-container>
               <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'" fxHide.lt-lg="true">
@@ -28,15 +28,15 @@
               <md-input-container fxFlex="1 1 80px" [floatPlaceholder]="first?'auto':'never'">
                 <input mdInput placeholder="Kg" type="number" step="0.1" [(ngModel)]="fermentable.amount">
               </md-input-container>
-              <md-select placeholder="{{first?'Uso':''}}" [(ngModel)]="fermentable.use" fxFlex="1 1 120px">
+              <md-select placeholder="{{first?'Uso':''}}" [(ngModel)]="fermentable.use" fxFlex="1 1 150px">
                 <md-option *ngFor="let use of uses" [value]="use">
                   {{ use }}
                 </md-option>
               </md-select>
             </div>
           </div>
-      </md-list-item>
-    </md-list>
+      </div>
+    </div>
     <b>Total: </b>{{recipe.amountFermentables | number:'1.3-3'}} Kg
   <!--</md-card-content>
 </md-card>-->

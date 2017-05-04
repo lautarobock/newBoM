@@ -8,7 +8,10 @@
     <a href="#/"><img src="favicon.ico" style="width: 50px" /> </a>BoM <i class="fa fa-chevron-right"></i> {{recipe?.name}}
     <div  style="flex: 1 1 auto"></div>
     <div>
-      
+      <md-slide-toggle color="primary" [(ngModel)]="context.advanced" labelPosition="before">
+        <span [hidden]="!context.advanced">Avanzado</span>
+        <span [hidden]="context.advanced">Compacto</span>
+      </md-slide-toggle>
     </div>
     <div id="my-signin2"></div>
     <!--<button md-button (click)="save()">Guardar</button>-->
@@ -16,12 +19,12 @@
   <md-progress-bar style="position: absolute;z-index: 10000;" mode="indeterminate" *ngIf="progress!==0" [value]="progress"></md-progress-bar>
   <md-card>
     <md-card-content>
-      <bom-recipe-general [recipe]="recipe" *ngIf="recipe"></bom-recipe-general>
+      <bom-recipe-general [recipe]="recipe" [context]="context" *ngIf="recipe"></bom-recipe-general>
       <div style="margin-top: 1em">
-        <bom-recipe-grains [recipe]="recipe" *ngIf="recipe"></bom-recipe-grains>
+        <bom-recipe-grains [recipe]="recipe" [context]="context" *ngIf="recipe"></bom-recipe-grains>
       </div>
       <div style="margin-top: 2em">
-        <bom-recipe-hops [recipe]="recipe" *ngIf="recipe"></bom-recipe-hops>
+        <bom-recipe-hops [recipe]="recipe" [context]="context" *ngIf="recipe"></bom-recipe-hops>
       </div>
     </md-card-content>
   </md-card>

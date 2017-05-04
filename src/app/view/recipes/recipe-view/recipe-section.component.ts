@@ -8,5 +8,6 @@ export abstract class RecipeSection {
    * @todo #refact: Refactor cada interfaz en su archivo.
    */
   @Input() recipe = <Recipe>null;
+  @Input() context: any;
 
 }
