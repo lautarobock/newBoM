@@ -48,14 +48,10 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.recipesService.get(this.recipeId).subscribe(recipe => {
       
-      this.recipe = new Proxy<Recipe>(
-        new Bom1Recipe(
-          recipe, 
-          recipe.FERMENTABLES.FERMENTABLE.map(f => new Proxy<Fermentable>(new Bom1Fermentable(f, this.calcService), this.proxy('fermentable'))),
-          recipe.HOPS.HOP.map(h => new Proxy<Hop>(new Bom1Hop(h, this.calcService), this.proxy('hop'))),
-          new Proxy<Vital>(new Bom1Vital(recipe, this.calcService), this.proxy('vital')),
-          this.calcService, 
-        ), this.proxy()
+      this.recipe = new Bom1Recipe(
+        recipe, 
+        this.calcService, 
+        this.changeService
       );
     });
     this.unsubscribeChange = this.changeService.onChange((value) => this.save());
