@@ -5,16 +5,16 @@
   "static": {
     "urls": {
       "https://lautarobock.github.io/newBoM/polyfills.565a8dfb6c57c22c390d.bundle.js": "2cfd6700258ed164b7752c9b3524d4f576b696a0",
-      "https://lautarobock.github.io/newBoM/main.ae0c10d45746439d241b.bundle.js": "a2731be7b9fc587593996924a271d075eb990d01",
+      "https://lautarobock.github.io/newBoM/main.839ec2bb1a51f6b6e2be.bundle.js": "f8b098650611f18d2955ade816c41458599d44d6",
       "https://lautarobock.github.io/newBoM/sw-register.b73048fe3d9f8a1e7ae5.bundle.js": "a98270c864fc34e37b1d992bfe5994323558c2f8",
       "https://lautarobock.github.io/newBoM/vendor.f14c68951561dee54ede.bundle.js": "11b879ef229c3d0a62d346ebc9a07507ef529c1a",
-      "https://lautarobock.github.io/newBoM/inline.7d2565fd0b3cc72a36f1.bundle.js": "e2200d7b9a3e43bcf77760a5200dfba9646ab0e0",
+      "https://lautarobock.github.io/newBoM/inline.1ddb80560c59846ba5f6.bundle.js": "12bd25d074d68d76ef54583596622891bdf76b4d",
       "https://lautarobock.github.io/newBoM/styles.dd5008fd3b6e3aede988.bundle.css": "8ec3bd216c65ff6ea141258982b320af460b0f20",
       "https://lautarobock.github.io/newBoM/assets/images/barley.svg": "ac9587311baa5caed4181471d0692d23b8103b82",
       "https://lautarobock.github.io/newBoM/assets/images/hops.svg": "20df0c89552bde0847b4ff8a51efdaf8c8d1562e",
       "https://lautarobock.github.io/newBoM/favicon.ico": "3c22c11d7018f031555b74e1ec5c9532ff7206b2",
       "https://lautarobock.github.io/newBoM/manifest.json": "0f1028b410eed0c1fb13419c0b1fbb3dff3ad816",
-      "https://lautarobock.github.io/newBoM/index.html": "d2d8cb20745494a5600a64e229d8ee9c7536b2ad"
+      "https://lautarobock.github.io/newBoM/index.html": "d1394c4fe263e91f6c0fa0bd121957acc8fe280a"
     },
     "_generatedFromWebpack": true
   }
