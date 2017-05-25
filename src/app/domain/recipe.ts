@@ -1,7 +1,11 @@
 import { ChangeService } from '../services/change.service';
 import { CalcService } from '../services/calc.service';
 
+/**
+ * @todo #general: add code to view 
+ */
 export interface Recipe {
+    code: string;
     name: string;
     style: string;
     vital: Vital;
@@ -103,7 +107,12 @@ export class Bom1Recipe implements Recipe {
     get object(): any {
         return this.obj;
     }
-
+    get code(): string {
+        return this.obj.code;
+    }
+    set code(value: string) {
+        this.obj.code = value;
+    }
     get name(): string {
         return this.obj.NAME;
     }
